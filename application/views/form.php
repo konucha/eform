@@ -1,3 +1,4 @@
+
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?><!DOCTYPE html>
@@ -8,89 +9,121 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	<style type="text/css">
 
-		.container{
-			width: 100%;
-			display: flex;
-			margin-left: 50px;
-			margin-right: 50px;
-		} 
+	/* ::selection { background-color: #E13300; color: white; }
+	::-moz-selection { background-color: #E13300; color: white; } */
 
-		div{
-			/* margin-left: 100px;
-			margin-right: 100px;
-			margin-top: 30px; */
-			padding: 30px;
-			text-align: center;
-			background-color: #666666;
-		}
+	body {
+		background-color: #CAE4F3;
+		margin: 60px;
+		font: 13px/20px normal Helvetica, Arial, sans-serif;
+		color: #4F5155;
+	}
 
-		table {
-			width: max-content;
-			height: auto;
-			border: 1px;
-		}
+	h1 {
+		color: #234ECF;
+		background-color: transparent;
+		border-bottom: 1px solid #D0D0D0;
+		font-size: 25px;
+		font-weight: bold;
+		text-align: center;
+		margin: 0 0 14px 0;
+		padding: 30px 30px 30px 30px;
+	}
 
-		td, th {
-			padding: 5px;
-		}
+	#body {
+		margin: 40px 40px 40px 40px;
+		min-height: 96px;
+	}
 
-		.center {
-			display: flex;
-			justify-content: center;
-		}
+	/* p {
+		margin: 0 0 10px;
+		padding:0;
+	}
 
-		@page { 
-			size: A4 landscape 
-		}
+	p.footer {
+		text-align: right;
+		font-size: 11px;
+		border-top: 1px solid #D0D0D0;
+		line-height: 32px;
+		padding: 0 10px 0 10px;
+		margin: 20px 0 0 0;
+	} */
 
-		body { 
-			font: normal 10pt Arial;
-		}
+	#container {
+		margin: 80px;
+		border-radius: 20px;
+		background-color: #FFFFFF;
+		border: 1px solid #D0D0D0;
+		box-shadow: 0 0 8px #D0D0D0;
+	}
 
-		h1 { 
-			font: bold 20pt Arial; 
-			text-align: left; 
-			margin: 30pt; 
-			color: #666666;
-		}
+	input {
+		width: 98%;
+		background-color: #D9D9D9;
+		border-radius: 10px;
+		border: #4F5155 solid 0px;
+		margin: 10px 5px;
+		padding: 10px;
+	}
 
-		/* h2 { font: bold 15pt Arial; text-align: right; margin: 15pt; color: #999999; float: right; } */
-		p { 
-			margin: 10pt; 
-		}
+	button {
+		display: inline-block;
+		vertical-align: middle;
+		margin: 30px 5px;
+		padding: 10px 50px;
+		background-color: #0D6EB2;
+		border: none;
+		cursor: pointer;
+		font-weight: bold;
+		color: #FFFFFF;
+		text-decoration: none;
+		border-radius: 10px;
+	}
+
+	label {
+		display: block;
+		float: left;
+		clear: both;
+		font-weight: 600;
+	}
 
 
 	</style>
 </head>
 <body>
-	<div class="container">
-		<div>
-			<img src="img/logo.jpeg" alt="Logo" width="20" height="30">
-		</div>
-		<div>
-			PT PULAU SAMBU<br>
-        	FAKTUR TIMBANG KELAPA BULAT JAMBUL PANCANG<br>
-        	COCONUT PURCHASE INVOICE
-		</div>
-		<div>
-			Tanggal  : <span id="tgl_transaksi"></span><br>
-        	No. Invoice : <span id="no_invoice"></span><br>
-        	Page : 1/1
-		</div>
 
-	<!-- <table width="100%">
-    <thead>
-      <tr>
-        <th><img src="img/logo.jpeg" alt="Logo" width="20" height="30"></th>        
-		<th>PTULAU SAMBU<br>
-        	FAKTUR TIMBANG KELAPA BULAT JAMBUL PANCANG<br>
-        	COCONUT PURCHASE INVOICE</th>
-        <th>Tanggal  : <span id="tgl_transaksi"></span><br>
-        	No. Invoice : <span id="no_invoice"></span><br>
-        	Page : 1/1</th>
-      </tr>
-    </thead>
-  </table> -->
-  </div>
+<div id="container">
+	<h1>E-Form Faktur Timbang Kelapa</h1>
+
+	<div id="body">
+		<form action="index.php/Welcome/formInput" method="post">
+			<label for="berat">Berat Brutto (Kg)</label><br>
+			<input type="number" id="berat" name="berat"><br>
+
+			<!-- required -->
+
+			<label for="jaring">Jaring (Kg)</label><br>
+			<input type="number" id="jaring" name="jaring"><br>
+
+			<label for="persen">Persen (Kg)</label><br>
+			<input type="number" id="persen" name="persen"><br>
+
+			<label for="beratnet">Berat Net (Kg)</label><br>
+			<input type="number" id="beratnet" name="beratnet"><br>
+
+			<label for="harga">Harga (@Kg)</label><br>
+			<input type="number" id="harga" name="harga"><br>
+
+			<label for="jumlah">Jumlah Kelapa (Butir)</label><br>
+			<input type="number" id="jumlah" name="jumlah"><br>
+
+			<!-- <button onclick="calculate()">Calculate!</button> -->
+
+			<button type="submit">Submit</button>
+			<!-- <input type="submit" value="Submit"> -->
+		</form>
+	</div>
+</div> 
+
 </body>
 </html>
