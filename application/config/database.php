@@ -73,12 +73,35 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $active_group = 'default';
 $query_builder = TRUE;
 
+$db['default'] = array(
+	'dsn'	=> '',
+	'hostname' => 'localhost',
+	'username' => 'root',
+	'password' => '',
+	'database' => 't_details',
+	'dbdriver' => 'mysqli',
+	'dbprefix' => '',
+	'pconnect' => FALSE,
+	'db_debug' => (ENVIRONMENT !== 'production'),
+	'cache_on' => FALSE,
+	'cachedir' => '',
+	'char_set' => 'utf8',
+	'dbcollat' => 'utf8_general_ci',
+	'swap_pre' => '',
+	'encrypt' => FALSE,
+	'compress' => FALSE,
+	'stricton' => FALSE,
+	'failover' => array(),
+	'save_queries' => TRUE
+);
+// 
+// Postgre://postgres:eko2@localhost:5432/postgres?charset=utf8&connect_timeout=5&sslmode=1
 // $db['default'] = array(
-// 	'dsn'	=> '',
+// 	'dsn'	=> 'postgres://postgres:eko2@localhost:5432/postgres',
 // 	'hostname' => 'localhost',
-// 	'username' => '',
-// 	'password' => '',
-// 	'database' => '',
+// 	'username' => 'postgres',
+// 	'password' => 'eko2',
+// 	'database' => 'postgres',
 // 	'dbdriver' => 'postgre',
 // 	'dbprefix' => '',
 // 	'pconnect' => FALSE,
@@ -94,28 +117,6 @@ $query_builder = TRUE;
 // 	'failover' => array(),
 // 	'save_queries' => TRUE
 // );
-
-$db['default'] = array(
-	'dsn'	=> 'Postgre://postgres:123@localhost:5432/postgres?charset=utf8&connect_timeout=5&sslmode=1',
-	'hostname' => 'localhost',
-	'username' => 'postgres',
-	'password' => '123',
-	'database' => 'postgres',
-	'dbdriver' => 'postgre',
-	'dbprefix' => '',
-	'pconnect' => FALSE,
-	'db_debug' => (ENVIRONMENT !== 'production'),
-	'cache_on' => FALSE,
-	'cachedir' => '',
-	'char_set' => 'utf8',
-	'dbcollat' => 'utf8_general_ci',
-	'swap_pre' => '',
-	'encrypt' => FALSE,
-	'compress' => FALSE,
-	'stricton' => FALSE,
-	'failover' => array(),
-	'save_queries' => TRUE
-);
 
 
 // /* Connection test: */

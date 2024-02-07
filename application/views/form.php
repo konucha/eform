@@ -1,4 +1,3 @@
-
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?><!DOCTYPE html>
@@ -96,7 +95,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<h1>E-Form Faktur Timbang Kelapa</h1>
 
 	<div id="body">
-		<form action="index.php/Welcome/formInput" method="post">
+	<!-- Welcome/fungsiFormInput -->
+	<!-- index.php/Welcome/formInput -->
+		<form action="index.php/Welcome/fungsiFormInput" method="post">
 			<label for="berat">Berat Brutto (Kg)</label><br>
 			<input type="number" id="berat" name="berat"><br>
 
