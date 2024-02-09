@@ -8,6 +8,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<meta charset="utf-8">
 	<title>E-Form Faktur Timbang Kelapa</title>
 
+	<script>
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
+	</script>
+
 	<style type="text/css">
 
 		.section-container {
@@ -37,7 +43,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		.item-invoice {
 			padding: 10px;
 			text-align: left;
-			margin-right: 150px;
+			margin-right: -180px;
+			margin-top: 50px;
+			/* background-color: #ccc; */
+			/* border: 1px solid #333; */
+		}
+
+		.item-invoice-data {
+			padding: 10px;
+			text-align: left;
+			margin-right: 100px;
 			margin-top: 50px;
 			/* background-color: #ccc; */
 			/* border: 1px solid #333; */
@@ -67,7 +82,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			margin-bottom: 20px
 		}
 
+		.item-1-data {
+			padding: 10px;
+			margin-left: -50px;
+			margin-top: 20px;
+			margin-bottom: 20px
+		}
+
 		.item-2 {
+			padding: 10px;
+			margin-left: 60px;
+			margin-top: 20px;
+			margin-bottom: 20px;
+		}
+
+		.item-2-data {
 			padding: 10px;
 			margin-top: 20px;
 			margin-bottom: 20px
@@ -76,7 +105,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		.item-3 {
 			padding: 10px;
 			text-align: left;
-			margin-right: 300px;
+			margin-right: -250px;
+			margin-top: 20px;
+			margin-bottom: 20px
+			/* background-color: #ccc; */
+			/* border: 1px solid #333; */
+		}
+
+		.item-3-data {
+			padding: 10px;
+			text-align: left;
+			margin-right: 100px;
 			margin-top: 20px;
 			margin-bottom: 20px
 			/* background-color: #ccc; */
@@ -111,6 +150,106 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			background-color: #f2f2f2;
 		}
 
+		tfoot{
+			background-color: #35A9DB;
+			font-weight: bold;
+			color: #fff;
+		}
+
+		.section-footer {
+			/* width: 100%; */
+			background-color: #D9D9D9;
+			margin: 30px;
+			border-radius: 20px;
+		}
+
+
+		.footer-container{
+			width: 100%;
+			display: flex;
+			justify-content: space-between; 
+			margin-left: 30px;
+			margin-right: 30px;
+		} 
+
+		.item-1 {
+			padding: 10px;
+			margin-left: 50px;
+			margin-top: 20px;
+			margin-bottom: 20px
+		}
+
+		.item-ttd-1 {
+			margin-left: -450px;
+		}
+
+		.item-2 {
+			padding: 10px;
+			margin-top: 20px;
+			margin-bottom: 20px
+		}
+
+		.item-ttd-2 {
+			margin-left: -450px;
+		}
+
+		.item-3 {
+			padding: 10px;
+			text-align: left;
+			margin-right: 200px;
+			margin-top: 20px;
+			margin-bottom: 20px
+			/* background-color: #ccc; */
+			/* border: 1px solid #333; */
+		}
+
+		/* .section-footer-2 {
+			background-color: #fff;
+			margin: -30px;
+			border-radius: 20px;
+		} */
+
+		.footer-2-container{
+			background-color: #C9C9C9;
+			width: 100%;
+			display: flex;
+			justify-content: space-between; 
+			border: 1px;
+			border-radius: 20px;
+			/* margin-left: 30px; */
+			/* margin-right: 30px; */
+		} 
+
+		.item-masa {
+			padding: 10px;
+			margin-left: 50px;
+			margin-top: 20px;
+			margin-bottom: 20px
+		}
+
+		.item-kode {
+			padding: 10px;
+			text-align: left;
+			margin-right: 200px;
+			margin-top: 20px;
+			margin-bottom: 20px
+		}
+
+		button {
+			float: right;
+			display: inline-block;
+			vertical-align: middle;
+			margin: 30px;
+			padding: 15px 50px;
+			background-color: #FF7272;
+			border: none;
+			cursor: pointer;
+			font-weight: bold;
+			color: #FFFFFF;
+			text-decoration: none;
+			border-radius: 10px;
+		}
+
 		body { 
 			font: normal 13pt Arial;
 		}
@@ -126,10 +265,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			text-align: right;
 		}
 
-		tfoot{
-			background-color: #35A9DB;
-			font-type: bold;
-		}
+		
 
 
 
@@ -142,32 +278,58 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	<section class="section-container">
 		<div class="header-container">
-			<div class="item-logo"><img src="<?php echo base_url('assets/logo.jpeg')?>" alt="Logo" width="150"></div>
-			<div class="item-header"><h1>PT PULAU SAMBU<br>
+			<div class="item-logo">
+				<img src="<?php echo base_url('assets/logo.png')?>" alt="Logo" width="150">
+			</div>
+			<div class="item-header">
+								<h1>PT PULAU SAMBU<br>
 								FAKTUR TIMBANG KELAPA BULAT JAMBUL PANCANG<br>
-								COCONUT PURCHASE INVOICE</h1></div>
-			<div class="item-invoice">Tanggal  : <span id="tgl_transaksi"></span><br>
-								No. Invoice : <span id="no_invoice"></span><br>
-								Page : 1/1</div>
+								COCONUT PURCHASE INVOICE</h1>
+			</div>
+			<div class="item-invoice">
+								Tanggal <span id="tgl_transaksi"></span><br>
+								No. Invoice  <span id="no_invoice"></span><br>
+								Page 
+			</div>
+								<div class="item-invoice-data">
+											: Marina 123<span id="tgl_transaksi"></span><br>
+											: PCG Sungai Guntung<span id="no_invoice"></span><br>
+											: 1/1
+			</div>
 		</div>
 	</section>
 
 	<section class="section-info">
 	<div class="info-container">
         <div class="item-1">
-							Supplier    : <br>
-							Nama Petani : <br>
-							Supervisor	:
+							Supplier    <br>
+							Nama Petani <br>
+							Supervisor	
+						</div>
+						<div class="item-1-data">
+							: PCG19 - Eko Cahyo<br>
+							: Sujono<br>
+							: Saiman
 						</div>
         <div class="item-2">
-							Sortir   : <br>
-							Tally    : <br>
-							Bongkar	 :
+							Sortir<br>
+							Tally<br>
+							Bongkar
+						</div>
+						<div class="item-2-data">
+							: 32<br>
+							: 88039<br>
+							: 12.06.2023 s/d 15.06.2023
 						</div>
         <div class="item-3">
-							Kapal    : <br>
-							Area     : <br>
-							Conveyor :
+							Kapal<br>
+							Area<br>
+							Conveyor
+						</div>
+						<div class="item-3-data">
+							: Marina 123<br>
+							: PCG Sungai Guntung<br>
+							: C61
 						</div>
     </div>	
 	</section>
@@ -219,6 +381,46 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			</tfoot>
 		</table>
 	</section>
+
+	<section class="section-footer">
+		<div class="footer-container">
+			<div class="item-1">
+								Dibuat Oleh <br><br>
+								Nama : Abdan R <br>
+								Tanggal : 12 Juni 2023
+							</div>
+							<div class="item-ttd-1">
+								<img src="<?php echo base_url('assets/ttd.png')?>" alt="ttd-1" width="150">
+							</div>
+			<div class="item-2">
+								Dibuat Oleh <br><br>
+								Nama : Abdan R <br>
+								Tanggal : 12 Juni 2023
+							</div>
+							<div class="item-ttd-2">
+								<img src="<?php echo base_url('assets/ttd.png')?>" alt="ttd-2" width="150">
+							</div>
+			<div class="item-3">
+								<br>
+								<br>
+								Di Cetak Pada : 12 Juni 2023 19:23:30 <br>
+								Oleh                 : Abdan
+							</div>
+		</div>	
+
+		<div class="footer-2-container">
+			<div class="item-masa">
+				Masa Berlaku: 12 Juni 2023
+			</div>
+			<div class="item-kode">
+				FQM-0192384958603995
+			</div>
+		</div>
+	</section>
+
+	<form action="export" class="button-excel">
+		<button type="submit">Unduh Excel</button>
+	</form>
 
   </div>
 </body>

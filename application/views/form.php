@@ -95,6 +95,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<h1>E-Form Faktur Timbang Kelapa</h1>
 
 	<div id="body">
+
+	<script>
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
+	</script>
 	<!-- Welcome/fungsiFormInput -->
 	<!-- index.php/Welcome/formInput -->
 		<form action="index.php/Welcome/fungsiFormInput" method="post">

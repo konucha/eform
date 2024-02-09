@@ -74,12 +74,13 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
-	'dsn'	=> '',
+	'dsn'	=> '',   //postgre://postgres:eko2@localhost:5432/postgres?charset=utf8&connect_timeout=5&sslmode=1
 	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'database' => 't_details',
-	'dbdriver' => 'mysqli',
+	'username' => 'postgres',
+	'password' => 'eko2',
+	'database' => 'postgres',
+	'port'     => 5432,
+	'dbdriver' => 'postgre',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),
