@@ -20,17 +20,14 @@ class Welcome extends CI_Controller {
 
 	// // Index
 	public function index() {
-		$queryDataForm = $this->form_model->getDataForm();
-		$DATA = array('queryDataForms' => $queryDataForm);
+		// $queryDataForm = $this->form_model->getDataForm();
+		// $DATA = array('queryDataForms' => $queryDataForm);
 	
-		$this->load->view('form', $DATA);
+		$this->load->view('form');
 	}
-	// public function index() {
-	// 	$this->load->view('form');
-	// }
 
 	public function formInput() {
-		$this->load->view('detail_form');
+    	$this->load->view('detail_form');
 	}
 
 	public function fungsiFormInput() {
@@ -50,21 +47,37 @@ class Welcome extends CI_Controller {
 			'jumlah' => $jumlah,
         );
 
-		$queryDataForm = $this->form_model->getDataForm();
-		$DATA = array('queryDataForms' => $queryDataForm);
-
         $this->form_model->insertDataForm($ArrInsert);
-		$this->load->view('detail_form', $DATA);
 
-		// if($this->load->view('detail_form')) {
-			// redirect('/Welcome/fungsiFormInput');
-		// }
+		$this->session->set_flashdata('success_message', 'Data berhasil disimpan.');
+		redirect("welcome/fungsiGetData");
 
 	}
 
-	// public function index() {
-	// 	$this->load->view('form');
-	// }
+	public function fungsiGetData() {
+		$berat = $this->input->get('berat');
+		$jaring = $this->input->get('jaring');
+		$persen = $this->input->get('persen');
+		$beratnet = $this->input->get('beratnet');
+		$harga = $this->input->get('harga');
+		$jumlah = $this->input->get('jumlah');
+
+		$ArrInsert = array(
+            'berat' => $berat,
+            'jaring' => $jaring,
+            'persen' => $persen,
+			'beratnet' => $beratnet,
+			'harga' => $harga,
+			'jumlah' => $jumlah,
+        );
+
+		$queryDataForm = $this->form_model->getDataForm();
+		$DATA = array('queryDataForms' => $queryDataForm);
+
+		$this->load->view('detail_form', $DATA);
+
+	}
+
 
 	public function export() {
 		$spreadsheet = new Spreadsheet();
@@ -250,6 +263,10 @@ class Welcome extends CI_Controller {
 			$sheet->setCellValue('B'.$numrow_footer++, "Dibuat oleh");
 			$sheet->setCellValue('B'.$numrow_footer++, "Nama     : Abdan R");
 			$sheet->setCellValue('B'.$numrow_footer++, "Tanggal  : 12 Juni 2023");
+			
+			// $sheet->getStyle('B'.$numrow_footer)->applyFromArray($style_row);
+			// $sheet->getStyle('B'.$numrow_footer)->applyFromArray($style_row);
+			// $sheet->getStyle('B'.$numrow_footer)->applyFromArray($style_row);
 
 
 			$ttd_1 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
@@ -258,10 +275,16 @@ class Welcome extends CI_Controller {
 			$ttd_1->setCoordinates('C'.$numrow_footer_ttd);
 			$ttd_1->setWorksheet($spreadsheet->getActiveSheet());
 
+			// $sheet->getStyle('C'.$numrow_footer_ttd)->applyFromArray($style_row);
+
 			//TTD 2
 			$sheet->setCellValue('D'.$numrow_footer_2++, "Dibuat oleh");
 			$sheet->setCellValue('D'.$numrow_footer_2++, "Nama     : Abdan R");
 			$sheet->setCellValue('D'.$numrow_footer_2++, "Tanggal  : 12 Juni 2023");
+
+			// $sheet->getStyle('D'.$numrow_footer_2)->applyFromArray($style_row);
+			// $sheet->getStyle('D'.$numrow_footer_2)->applyFromArray($style_row);
+			// $sheet->getStyle('D'.$numrow_footer_2)->applyFromArray($style_row);
 
 			$ttd_1 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
 			$ttd_1->setName('ttd-1');
@@ -269,9 +292,14 @@ class Welcome extends CI_Controller {
 			$ttd_1->setCoordinates('E'.$numrow_footer_2_ttd);
 			$ttd_1->setWorksheet($spreadsheet->getActiveSheet());
 
+			// $sheet->getStyle('E'.$numrow_footer_2_ttd)->applyFromArray($style_row);
+
 			//Cetak oleh
 			$sheet->setCellValue('G'.$numrow_footer_cetak++, "Di Cetak Pada : 12 Juni 2023 19:23:30");
 			$sheet->setCellValue('G'.$numrow_footer_cetak++, "Oleh          : Abdan R");
+
+			// $sheet->getStyle('G'.$numrow_footer_cetak)->applyFromArray($style_row);
+			// $sheet->getStyle('G'.$numrow_footer_cetak)->applyFromArray($style_row);
 
 			//Masa berlaku dan Kode Unik
 			$sheet->setCellValue('B'.$numrow_footer_masa++, "Masa Berlaku : 01.06.2024");
