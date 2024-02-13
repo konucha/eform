@@ -8,12 +8,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<meta charset="utf-8">
 	<title>E-Form Faktur Timbang Kelapa</title>
 
-	<script>
-    if ( window.history.replaceState ) {
-        window.history.replaceState( null, null, window.location.href );
-    }
-	</script>
-
 	<style type="text/css">
 
 		.section-container {
@@ -58,11 +52,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			/* border: 1px solid #333; */
 		}
 
-
 		.section-info {
 			/* width: 100%; */
 			background-color: #D9D9D9;
-			margin: 30px;
+			margin: 10px 30px 10px 30px;
 			border-radius: 20px;
 		}
 
@@ -120,6 +113,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			margin-bottom: 20px
 			/* background-color: #ccc; */
 			/* border: 1px solid #333; */
+		}
+
+		button {
+			float: right;
+			display: inline-block;
+			vertical-align: middle;
+			margin-top: 10px;
+			margin-bottom: 20px;
+			margin-right: 30px;
+			padding: 15px 30px;
+			background-color: #FF7272;
+			border: none;
+			cursor: pointer;
+			font-weight: bold;
+			color: #FFFFFF;
+			text-decoration: none;
+			border-radius: 10px;
+		}
+
+		button:hover {
+			background-color: #AA0000;
 		}
 
 		.table-1 {
@@ -235,23 +249,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			margin-bottom: 20px
 		}
 
-		button {
-			float: right;
-			display: inline-block;
-			vertical-align: middle;
-			margin: 30px;
-			padding: 15px 50px;
-			background-color: #FF7272;
-			border: none;
-			cursor: pointer;
-			font-weight: bold;
-			color: #FFFFFF;
-			text-decoration: none;
-			border-radius: 10px;
-		}
-
 		body { 
-			font: normal 13pt Arial;
+			font: 15px/20px normal Helvetica, Arial, sans-serif;
 		}
 
 		h1 { 
@@ -264,12 +263,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		span {
 			text-align: right;
 		}
-
-		
-
-
-
-
 
 
 	</style>
@@ -289,11 +282,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<div class="item-invoice">
 								Tanggal <span id="tgl_transaksi"></span><br>
 								No. Invoice  <span id="no_invoice"></span><br>
-								Page 
+								Page <span id="page">
 			</div>
 								<div class="item-invoice-data">
-											: Marina 123<span id="tgl_transaksi"></span><br>
-											: PCG Sungai Guntung<span id="no_invoice"></span><br>
+								<?php 
+									foreach ($queryDataUsers as $key => $row) {
+												$tanggal = $row->tanggal;
+												$id = $row->id;
+									} ?>
+											: <?php echo $tanggal?><span id="tgl_transaksi"></span><br>
+											: <?php echo $id?>/PSG/II/2024<span id="no_invoice"></span><br>
 											: 1/1
 			</div>
 		</div>
@@ -301,15 +299,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	<section class="section-info">
 	<div class="info-container">
+	<?php 
+	foreach ($queryDataUsers as $key => $row) {
+				$tanggal = $row->tanggal;
+				$id = $row->id;
+				$supplier = $row->supplier;
+				$petani = $row->petani;
+				$supervisor= $row->supervisor;
+				$sortir = $row->sortir;
+				$tally = $row->tally;
+				$bongkar = $row->bongkar;
+				$kapal = $row->kapal;
+				$area = $row->area;
+				$conveyor = $row->conveyor;
+          } ?>
         <div class="item-1">
 							Supplier    <br>
 							Nama Petani <br>
 							Supervisor	
 						</div>
 						<div class="item-1-data">
-							: PCG19 - Eko Cahyo<br>
-							: Sujono<br>
-							: Saiman
+							: <?php echo $supplier?><br>
+							: <?php echo $petani?><br>
+							: <?php echo $supervisor?>
 						</div>
         <div class="item-2">
 							Sortir<br>
@@ -317,9 +329,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							Bongkar
 						</div>
 						<div class="item-2-data">
-							: 32<br>
-							: 88039<br>
-							: 12.06.2023 s/d 15.06.2023
+							: <?php echo $sortir?><br>
+							: <?php echo $tally?><br>
+							: <?php echo $bongkar?>
 						</div>
         <div class="item-3">
 							Kapal<br>
@@ -327,12 +339,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							Conveyor
 						</div>
 						<div class="item-3-data">
-							: Marina 123<br>
-							: PCG Sungai Guntung<br>
-							: C61
+							: <?php echo $kapal?><br>
+							: <?php echo $area?><br>
+							: <?php echo $conveyor?>
 						</div>
     </div>	
 	</section>
+
+	<form action="exportData" class="button-excel">
+		<button type="submit">Unduh Excel</button>
+	</form>
+
+	<form action="inputFormUtama" class="button-tambah">
+		<button type="submit">Tambah Data</button>
+	</form>
 
 	<section class="section-table">
 		<table class="table-1">
@@ -365,9 +385,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<td><?php echo $row->jaring ?></td>
 							<td><?php echo $row->persen ?></td>
 							<td><?php echo $row->beratnet ?></td>
-							<td><?php echo $row->harga ?></td>
+							<td>Rp<?php echo $row->harga ?>,-</td>
 							<td><?php echo $row->jumlah ?></td>
-							<td><?php echo $total ?></td>
+							<td>Rp<?php echo $total ?>,-</td>
 						<tr>
 					<?php } ?>
 			</tbody>
@@ -376,7 +396,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<td colspan="4">Berat Total</td>
 					<td><?php echo $berat_total?></td>
 					<td colspan="2">Total</td>
-					<td><?php echo $grade_total?></td>
+					<td>Rp<?php echo $grade_total?>,-</td>
 				</tr>
 			</tfoot>
 		</table>
@@ -386,16 +406,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<div class="footer-container">
 			<div class="item-1">
 								Dibuat Oleh <br><br>
-								Nama : Abdan R <br>
-								Tanggal : 12 Juni 2023
+								Nama : <?php echo $queryDataUsers['0']->petani?><br>
+								Tanggal : <?php echo $queryDataUsers['0']->tanggal?>
 							</div>
 							<div class="item-ttd-1">
 								<img src="<?php echo base_url('assets/ttd.png')?>" alt="ttd-1" width="150">
 							</div>
 			<div class="item-2">
 								Dibuat Oleh <br><br>
-								Nama : Abdan R <br>
-								Tanggal : 12 Juni 2023
+								Nama : <?php echo $queryDataUsers['0']->supervisor?><br>
+								Tanggal : <?php echo $queryDataUsers['0']->tanggal?>
 							</div>
 							<div class="item-ttd-2">
 								<img src="<?php echo base_url('assets/ttd.png')?>" alt="ttd-2" width="150">
@@ -403,8 +423,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<div class="item-3">
 								<br>
 								<br>
-								Di Cetak Pada : 12 Juni 2023 19:23:30 <br>
-								Oleh                 : Abdan
+								Di Cetak Pada : <?php echo $queryDataUsers['0']->tanggal?><br>
+								Oleh                 : <?php echo $queryDataUsers['0']->supervisor?>
 							</div>
 		</div>	
 
@@ -417,10 +437,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			</div>
 		</div>
 	</section>
-
-	<form action="export" class="button-excel">
-		<button type="submit">Unduh Excel</button>
-	</form>
 
   </div>
 </body>
