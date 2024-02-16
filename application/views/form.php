@@ -120,7 +120,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	<div id="body">
 
-		<form action="fungsiFormInputUser" method="post">		
+		<form action="index.php/welcome/fungsiFormInputUser" method="post">		
 			<div class="row">
                 <div class="column">
                     <label for="supplier">Supplier</label><br>

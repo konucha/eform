@@ -8,7 +8,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>E-Form Faktur Timbang Kelapa</title>
+	<title>Edit E-Form Faktur Timbang Kelapa</title>
 
 	<style type="text/css">
 
@@ -76,45 +76,38 @@
 		font-weight: 600;
 	}
 
-
 	</style>
 </head>
 <body>
 
-<?php if ($this->session->flashdata('success')): ?>
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <?php echo $this->session->flashdata('success');?>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div> 
-<?php endif;?> 
-
 <div id="container">
-	<h1>E-Form Faktur Timbang Kelapa</h1>
+	<h1>Edit Data E-Form Faktur Timbang Kelapa</h1>
 
 	<div id="body">
 
-		<form action="formInput" method="post">
+		<form action="<?php echo base_url('index.php/welcome/fungsiEdit');?>" method="post">
+
+			<input type="hidden" id="id" name="id" value="<?php echo $queryDataEdits->id?>"> <br>
+
 			<label for="berat">Berat Brutto (Kg)</label><br>
-			<input type="number" id="berat" name="berat" required><br>
+			<input type="number" id="berat" name="berat" value="<?php echo $queryDataEdits->berat?>"> <br>
 
 			<!-- required -->
 
 			<label for="jaring">Jaring (Kg)</label><br>
-			<input type="number" id="jaring" name="jaring" required><br>
+			<input type="number" id="jaring" name="jaring" value="<?php echo $queryDataEdits->jaring?>"><br>
 
 			<label for="persen">Persen (Kg)</label><br>
-			<input type="number" id="persen" name="persen" required min="0" max="100"><br>
+			<input type="number" id="persen" name="persen" value="<?php echo $queryDataEdits->persen?>"><br>
 
 			<label for="beratnet">Berat Net (Kg)</label><br>
-			<input type="number" id="beratnet" name="beratnet" required><br>
+			<input type="number" id="beratnet" name="beratnet" value="<?php echo $queryDataEdits->beratnet?>"><br>
 
 			<label for="harga">Harga (@Kg)</label><br>
-			<input type="number" id="harga" name="harga" required><br>
+			<input type="number" id="harga" name="harga" value="<?php echo $queryDataEdits->harga?>"><br>
 
 			<label for="jumlah">Jumlah Kelapa (Butir)</label><br>
-			<input type="number" id="jumlah" name="jumlah" required><br>
+			<input type="number" id="jumlah" name="jumlah" value="<?php echo $queryDataEdits->jumlah?>"><br>
 
 			<button type="submit">Submit</button>
 		</form>

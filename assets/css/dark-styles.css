@@ -1,0 +1,5 @@
+  /* dark-styles.css */
+  body.dark {
+    background-color: #000;
+    color: #fff;
+  }

@@ -8,6 +8,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<meta charset="utf-8">
 	<title>E-Form Faktur Timbang Kelapa</title>
 
+		<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+	<!-- Bootstrap JS -->
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+		<!-- Bootstrap CSS -->
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
 	<style type="text/css">
 
 		.section-container {
@@ -115,14 +127,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			/* border: 1px solid #333; */
 		}
 
-		button {
+		.button-excel {
 			float: right;
 			display: inline-block;
 			vertical-align: middle;
-			margin-top: 10px;
+			margin-top: 30px;
 			margin-bottom: 20px;
 			margin-right: 30px;
-			padding: 15px 30px;
+			padding: 15px 20px;
 			background-color: #FF7272;
 			border: none;
 			cursor: pointer;
@@ -132,8 +144,72 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			border-radius: 10px;
 		}
 
-		button:hover {
+		.button-excel:hover {
 			background-color: #AA0000;
+		}
+
+		.button-tambah {
+			float: right;
+			display: inline-block;
+			vertical-align: middle;
+			margin-top: 30px;
+			margin-bottom: 20px;
+			margin-right: 20px;
+			padding: 15px 20px;
+			background-color: #0090ff;
+			border: none;
+			cursor: pointer;
+			font-weight: bold;
+			color: #FFFFFF;
+			text-decoration: none;
+			border-radius: 10px;
+		}
+
+		.button-tambah:hover {
+			background-color: #005596;
+		}
+
+		.button-hapus {
+			float: right;
+			display: inline-block;
+			vertical-align: middle;
+			margin-top: 10px;
+			margin-bottom: 20px;
+			margin-right: 20px;
+			margin-left: -70px;
+			padding: 15px 20px;
+			background-color: #FF7272;
+			border: none;
+			cursor: pointer;
+			font-weight: bold;
+			color: #FFFFFF;
+			text-decoration: none;
+			border-radius: 10px;
+		}
+
+		.button-hapus:hover {
+			background-color: #AA0000;
+		}
+
+		.button-edit {
+			float: right;
+			display: inline-block;
+			vertical-align: middle;
+			margin-top: 10px;
+			margin-bottom: 20px;
+			margin-right: 20px;
+			padding: 15px 20px;
+			background-color: #0090ff;
+			border: none;
+			cursor: pointer;
+			font-weight: bold;
+			color: #FFFFFF;
+			text-decoration: none;
+			border-radius: 10px;
+		}
+
+		.button-edit:hover {
+			background-color: #005596;
 		}
 
 		.table-1 {
@@ -217,12 +293,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			/* border: 1px solid #333; */
 		}
 
-		/* .section-footer-2 {
-			background-color: #fff;
-			margin: -30px;
-			border-radius: 20px;
-		} */
-
 		.footer-2-container{
 			background-color: #C9C9C9;
 			width: 100%;
@@ -250,7 +320,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		}
 
 		body { 
-			font: 15px/20px normal Helvetica, Arial, sans-serif;
+			font: 16px/20px normal Helvetica, Arial, sans-serif;
 		}
 
 		h1 { 
@@ -264,10 +334,54 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			text-align: right;
 		}
 
+		/* dark mode */
+		@media screen and (prefers-color-scheme: light) {
+			body {
+				background-color: white;
+				color: #282828;
+			}
+			.dark-mode {
+				background-color: #282828;
+				color: white;
+			}
+		}
+		.smooth-transition {
+			transition: background-color 300ms;
+		}
+		@media screen and (prefers-color-scheme: dark) {
+			.dark-mode {
+				background-color: white;
+				color: #282828;
+			}
+			body {
+				background-color: #282828;
+				color: #282828;
+			}
+		}
+
 
 	</style>
 </head>
 <body>
+
+		<?php if ($this->session->flashdata('success')): ?>
+			<div class="alert alert-success alert-dismissible fade show" role="alert">
+				<?php echo $this->session->flashdata('success');?>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div> 
+		<?php endif;?>  
+
+			<?php if ($this->session->flashdata('delete')): ?>
+			<div class="alert alert-danger alert-dismissible fade show" role="alert">
+				<?php echo $this->session->flashdata('delete');?>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div> 
+		<?php endif;?>
+
 
 	<section class="section-container">
 		<div class="header-container">
@@ -289,7 +403,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									foreach ($queryDataUsers as $key => $row) {
 												$tanggal = $row->tanggal;
 												$id = $row->id;
-									} ?>
+											} 
+								?>
 											: <?php echo $tanggal?><span id="tgl_transaksi"></span><br>
 											: <?php echo $id?>/PSG/II/2024<span id="no_invoice"></span><br>
 											: 1/1
@@ -300,19 +415,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<section class="section-info">
 	<div class="info-container">
 	<?php 
-	foreach ($queryDataUsers as $key => $row) {
-				$tanggal = $row->tanggal;
-				$id = $row->id;
-				$supplier = $row->supplier;
-				$petani = $row->petani;
-				$supervisor= $row->supervisor;
-				$sortir = $row->sortir;
-				$tally = $row->tally;
-				$bongkar = $row->bongkar;
-				$kapal = $row->kapal;
-				$area = $row->area;
-				$conveyor = $row->conveyor;
-          } ?>
+		foreach ($queryDataUsers as $key => $row) {
+					$tanggal = $row->tanggal;
+					$id = $row->id;
+					$supplier = $row->supplier;
+					$petani = $row->petani;
+					$supervisor= $row->supervisor;
+					$sortir = $row->sortir;
+					$tally = $row->tally;
+					$bongkar = $row->bongkar;
+					$kapal = $row->kapal;
+					$area = $row->area;
+					$conveyor = $row->conveyor;
+			} 
+	?>
         <div class="item-1">
 							Supplier    <br>
 							Nama Petani <br>
@@ -346,12 +462,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>	
 	</section>
 
-	<form action="exportData" class="button-excel">
-		<button type="submit">Unduh Excel</button>
+	<button class="button-excel" onclick='changeToDarkMode();'>Change Mode</button>
+
+	<script>
+		function changeToDarkMode(settings) {
+			const element = document.body;
+			element.classList.toggle("dark-mode");
+			if (settings && settings.smooth_transition) {
+				element.classList.toggle("smooth-transition");
+			}
+		}
+	</script>
+
+	<form action="export">
+		<button class="button-excel" type="submit">Unduh Excel</button>
 	</form>
 
-	<form action="inputFormUtama" class="button-tambah">
-		<button type="submit">Tambah Data</button>
+	<form action="fungsiFormInput">
+		<button class="button-tambah" type="submit">Tambah Data</button>
 	</form>
 
 	<section class="section-table">
@@ -359,6 +487,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<thead>
 				<tr>
 					<th>No.</th>
+					<!-- <th>ID</th> -->
 					<th>Berat Brutto (Kg)</th>
 					<th>Jaring (Kg)</th>
 					<th>Persen (Kg)</th>
@@ -366,6 +495,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<th>Harga (@Kg)</th>
 					<th>Jumlah Kelapa (Butir)</th>
 					<th>Total</th>
+					<th>Aksi</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -388,6 +519,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<td>Rp<?php echo $row->harga ?>,-</td>
 							<td><?php echo $row->jumlah ?></td>
 							<td>Rp<?php echo $total ?>,-</td>
+							<td>
+								<a href="<?php echo base_url();?>index.php/welcome/tampilEditForm/<?php echo $row->id; ?>" class="btn btn-primary"> <i class="fas fa-edit"></i>Edit</a>
+								<a href="<?php echo base_url('index.php/welcome/fungsiHapusData')?>/<?php echo $row->id ?>" class="btn btn-danger" onclick="return confirm('Yakin akan menghapus?')"> <i class="fas fa-trash"></i>Delete</a>
+							</td>
 						<tr>
 					<?php } ?>
 			</tbody>
@@ -397,6 +532,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<td><?php echo $berat_total?></td>
 					<td colspan="2">Total</td>
 					<td>Rp<?php echo $grade_total?>,-</td>
+					<td colspan="3"></td>
 				</tr>
 			</tfoot>
 		</table>
